@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState ,useEffect} from "react";
 import { useLocation } from "react-router-dom";
 import UserContext from "../UserContext";
 import Filter from "./Filter";
@@ -8,7 +8,8 @@ import Spinner from "./Spinner";
 
 
 export default function Album(props) {
-  const products =  props.products
+const {products} =  props
+
   const { title, loading } = useContext(UserContext);
   const location = useLocation()
 
@@ -16,7 +17,6 @@ export default function Album(props) {
     <div className={location.pathname !== '/' ? 'my-5 py-3' : ''}>
       {!loading ? (
         <>
-          {" "}
           <div className="album bg-light mx-auto">
             <div className="container">
               <h2 className="text-center py-3 ">{title}</h2>
@@ -39,7 +39,7 @@ export default function Album(props) {
               </div>
             </div>
           </div>
-          <Filter />{" "}
+          <Filter/>{" "}
         </>
       ) : (
         <Spinner />

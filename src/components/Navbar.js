@@ -16,7 +16,7 @@ function Navbar() {
   };
   return (
     <div className="container">
-      <nav className="navbar navbar-expand-lg bg-dark navbar-dark px-lg-4 fixed-top">
+      <nav className="navbar navbar-expand-lg bg-dark navbar-dark px-lg-4 fixed-top ">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
             <i className="fa-solid fa-store-slash px-2"></i>

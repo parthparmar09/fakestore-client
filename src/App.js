@@ -20,6 +20,10 @@ function App() {
   const [title, setTitle] = useState("Top products");
   const [alert, setAlert] = useState({});
   const [cartItems, setCartItems] = useState([]);
+  const [sort , setSort] = useState('def')
+
+
+
 
 
   let navigate = useNavigate();
@@ -152,7 +156,8 @@ function App() {
           cartItems,
           getCart,
 
-          
+          sort,
+          setSort
         }}
       >
         <Navbar />

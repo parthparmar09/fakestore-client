@@ -4,8 +4,12 @@ import Album from "./Album";
 import { useLocation } from "react-router-dom";
 
 export default function Category() {
+  const {sort} = useContext(UserContext)
   const location = useLocation();
   const [catProducts, setCatProducts] = useState([]);
+  const [sorted ,setSorted] = useState([])
+
+
 
   const { setLoading, setTitle, giveAlert } = useContext(UserContext);
 
@@ -45,10 +49,16 @@ export default function Category() {
       });
   };
 
+
+  
   useEffect(() => {
     getProducts();
     // eslint-disable-next-line
   }, [location]);
+
+  useEffect(() => {
+    console.log(sort)
+  }, [sort])
 
   return (
     <>

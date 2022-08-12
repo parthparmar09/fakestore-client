@@ -14,8 +14,9 @@ export default function Home() {
   }, []);
 
   return (
-    <>
-      <Caraousel />
-    </>
+    <div className="my-5 pt-3">
+
+    <Caraousel/>
+    </div>
   );
 }
