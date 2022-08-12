@@ -61,8 +61,9 @@ const items = [
     "rating": {
     "rate": 4.6,
     "count": 400
-    }
     },
+    
+    
     {
     "id": 6,
     "title": "Solid Gold Petite Micropave ",
@@ -270,3 +271,4 @@ const items = [
         addItems()
     }).catch(err => console.log(err))
     
+    const a =19
