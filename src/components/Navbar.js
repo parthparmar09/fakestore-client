@@ -14,6 +14,8 @@ function Navbar() {
     navigate("/");
     giveAlert("warning", "logged out");
   };
+
+  
   return (
     <div className="container">
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark px-lg-4 fixed-top ">

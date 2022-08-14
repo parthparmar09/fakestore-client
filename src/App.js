@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState , useEffect} from "react";
 import { Routes, Route, useNavigate, Link } from "react-router-dom";
 
 import Alert from "./components/Alert";
@@ -27,8 +27,6 @@ function App() {
 
 
   let navigate = useNavigate();
-
-
 
   const signUp = (name, email, password, cpassword, otp) => {
     let url = "";
@@ -136,6 +134,10 @@ function App() {
     }, 1500);
   };
 
+  useEffect(()=>{
+    getCart()
+  } ,[])
+
   return (
     <>
       <UserContext.Provider
@@ -155,6 +157,7 @@ function App() {
 
           cartItems,
           getCart,
+          setCartItems,
 
           sort,
           setSort
