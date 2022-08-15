@@ -39,14 +39,33 @@ const OrderSchema = new mongoose.Schema({
         type : Number ,
         required : [true , `amount can't be empty`]
     },
-    paymentStatus : {
+    payment : {
+       status : {
         type : Boolean,
-        default : false,
+        default : false
+       },
+       payment_id : {
+        type : String
+       }
+
     },
-    isRefunded : {
-        type : Boolean,
-        default : false,
+    address : {
+        pin : {
+            type : Number ,
+            maxlength : 6,
+            minlength : 6,
+            required : [true , `pin can't be empty`]
+        },
+        locality : {
+            type : String
+        },
+        state : {
+            type : String,
+            required : [true , `state can't be empty`]
+
+        }
     }
+    
 
 })
 

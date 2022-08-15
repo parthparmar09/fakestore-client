@@ -1,11 +1,16 @@
 const crypto = require("crypto");
 const Razorpay = require("razorpay");
+const createErr = require('../error/error')
+
+
 const instance = new Razorpay({
   key_id: process.env.KEY_ID,
   key_secret: process.env.KEY_SECRET,
 });
+
+
 const startOrder = (req, res, next) => {
-  params = {
+  let params = {
     amount : req.body.amount,
     currency: "INR",
     receipt: `${Date.now()}`,
@@ -14,25 +19,29 @@ const startOrder = (req, res, next) => {
   instance.orders
     .create(params)
     .then((data) => {
-      res.send({ sub: data, status: "success" });
+      req.order = data.id
+      return next()
     })
     .catch((error) => {
-      res.send({ sub: error, status: "failed" });
+      req.err= error
+      return next()
     });
 };
 
 const verifyOrder = (req, res, next) => {
-  body = req.body.razorpay_order_id + "|" + req.body.razorpay_payment_id;
+  body = req.body.order_id + "|" + req.body.payment_id;
 
-  var expectedSignature = crypto
+  let expectedSignature = crypto
     .createHmac("sha256", process.env.KEY_SECRET)
     .update(body.toString())
     .digest("hex");
-  var response = { status: "failure" };
-  if (expectedSignature === req.body.razorpay_signature) {
-    response = { status: "success" };
+  let stat = { success : false };
+  if (expectedSignature === req.body.signature) {
+    stat = { success : true , payment_id : req.body.payment_id}
   }
-  res.send(response);
+  req.response = stat
+  return next()
+ 
 };
 
 

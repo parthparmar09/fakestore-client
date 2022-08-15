@@ -33,7 +33,6 @@ app.use("/images", express.static("files"));
 const userRoute = require("./routes/user");
 const productRoute = require("./routes/product");
 const cartRoute = require("./routes/cart");
-const paymentRoute = require("./routes/payments");
 const orderRoute = require("./routes/order");
 
 //function to authenticate all requests
@@ -42,7 +41,6 @@ const authorization = require("./middleware/authorization");
 app.use("/user", userRoute);
 app.use("/product", authorization, productRoute);
 app.use("/cart", authorization, cartRoute);
-app.use("/payment" , paymentRoute)
 app.use("/order" , authorization , orderRoute)
 
 
