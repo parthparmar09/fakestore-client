@@ -50,20 +50,6 @@ export default function OneProduct() {
                 width="400px"
               />
             </div>
-            <div className="thumbnails container d-flex justify-content-evenly">
-              <div className=" ">
-                <img src={product.image} height="55px" width="55px" alt="" />
-              </div>
-              <div className=" p-2">
-                <img src={product.image} height="55px" width="55px" alt="" />
-              </div>
-              <div className=" p-2">
-                <img src={product.image} height="55px" width="55px" alt="" />
-              </div>
-              <div className=" p-2">
-                <img src={product.image} height="55px" width="55px" alt="" />
-              </div>
-            </div>
           </div>
           <div className="container right flex-1  d-flex flex-column text-left mt-1 p-3">
             <h3>{product.title}</h3>
