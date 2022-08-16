@@ -39,7 +39,7 @@ export default function CartItem(props) {
     return (
       <div className="d-flex my-2 product-item rounded w-100 row">
         <div className='p-1 col-3' >
-          <img className='image-fluid' src={image} alt="" style={{height :'150px' , width : '150px'}} />
+          <img className='image-fluid cart-image' src={image} alt=""  />
         </div>
         <div className=" d-flex flex-column my-3 col-6">
           <h4 className=''>&#8377; {price}</h4>

@@ -47,7 +47,10 @@ code {
 #search-group {
   width: 20vw;
 }
-
+.cart-image{
+  height: 150px;
+  width: 150px;
+}
 
 
 @media screen and (max-width : 768px) {
@@ -80,6 +83,20 @@ code {
 
   nav {
     height: initial;
+  }
+  #cart-items{
+    width: 100%;
+    margin-left:0.8rem;
+  }
+
+  .cart-image{
+    width: 75px;
+    height: 75px;
+    margin-top: auto;
+  }
+
+  #single-product {
+    flex-direction: column;
   }
 
 }
