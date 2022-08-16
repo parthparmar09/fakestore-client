@@ -1,4 +1,4 @@
-import React, { useContext, useState ,useEffect} from "react";
+import React, { useContext} from "react";
 import { useLocation } from "react-router-dom";
 import UserContext from "../UserContext";
 import Filter from "./Filter";
