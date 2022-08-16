@@ -30,9 +30,9 @@ function App() {
     }
 
     if (name === "") {
-      url = "http://localhost:5000/user/changePass";
+      url = `${process.env.REACT_APP_BASE_URL}user/changePass`;
     } else {
-      url = "http://localhost:5000/user/register";
+      url = `${process.env.REACT_APP_BASE_URL}user/register`;
     }
     fetch(url, {
       method: "POST",
@@ -58,7 +58,7 @@ function App() {
   };
 
   const getOtp = (email) => {
-    fetch("http://localhost:5000/user/authentication", {
+    fetch(`${process.env.REACT_APP_BASE_URL}user/authentication`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
