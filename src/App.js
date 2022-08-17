@@ -1,17 +1,17 @@
-import { useState , useEffect} from "react";
-import { Routes, Route, useNavigate, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Routes, Route, useNavigate} from "react-router-dom";
 
 import Alert from "./components/Alert";
-import Category from "./components/Category";
-import Contact from "./components/Contact";
+import Category from "./pages/Category";
+import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
-import Home from "./components/Home";
-import Login from "./components/Login";
-import MyCart from "./components/MyCart";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import MyCart from "./pages/MyCart";
 import Navbar from "./components/Navbar";
-import OneProduct from "./components/OneProduct";
-import Account from "./components/Account";
-import Signup from "./components/Signup";
+import OneProduct from "./pages/OneProduct";
+import Account from "./pages/Account";
+import Signup from "./pages/Signup";
 import UserContext from "./UserContext";
 
 function App() {
@@ -78,49 +78,49 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  
   const getCart = () => {
-    fetch(`${process.env.REACT_APP_BASE_URL}cart/` , {
-      method : "GET" , 
-      headers : {
-        "authorization" : `Bearer ${localStorage.getItem('token')}`,
+    fetch(`${process.env.REACT_APP_BASE_URL}cart/`, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setCartItems(data.cart.items);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
-      }
-    }).then(res => res.json()).then(data => {
-      if(data.success){
-      
-        setCartItems(data.cart.items)
-      
-      }
-    }).catch(err => console.log(err))
-  }
-
-
-  const addToCart = (id ,  title , image ,  price , qty=1 ) => {
-    fetch(`${process.env.REACT_APP_BASE_URL}cart/` , {
-      method : "PATCH" , 
-      headers : {
-        "authorization" : `Bearer ${localStorage.getItem('token')}`,
+  const addToCart = (id, title, image, price, qty = 1) => {
+    fetch(`${process.env.REACT_APP_BASE_URL}cart/`, {
+      method: "PATCH",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
         "content-type": "application/json",
       },
-      body :JSON.stringify( {
-        "item" : {
-          "id" : id , 
-          "qty" : qty,
-          "title" : title,
-          "price" : price,
-          "image" : image,
-      }
+      body: JSON.stringify({
+        item: {
+          id: id,
+          qty: qty,
+          title: title,
+          price: price,
+          image: image,
+        },
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.success) {
+          return giveAlert("danger", data.msg);
+        }
+        giveAlert("success", data.msg);
+        getCart();
       })
-    }).then(res => res.json()).then(data => {
-      if(!data.success){
-        return giveAlert('danger' ,  data.msg)
-      }
-      giveAlert('success' , data.msg)
-      getCart()
-    }).catch(err => console.log(err))
-  }
-
+      .catch((err) => console.log(err));
+  };
 
   const giveAlert = (type, msg) => {
     setAlert({ type, msg });
@@ -129,9 +129,9 @@ function App() {
     }, 1500);
   };
 
-  useEffect(()=>{
-    getCart()
-  } ,[])
+  useEffect(() => {
+    getCart();
+  }, []);
 
   return (
     <>
@@ -141,7 +141,7 @@ function App() {
           setProducts,
           title,
           setTitle,
-     
+
           alert,
           giveAlert,
           addToCart,
@@ -153,28 +153,11 @@ function App() {
           cartItems,
           getCart,
           setCartItems,
-
-     
         }}
       >
         <Navbar />
         <Routes>
-          <Route
-            path="/"
-            exact
-            element={
-              localStorage.getItem("token") ? (
-                <Home />
-              ) : (
-                <div className="container my-5 py-5">
-                  <h3 className="my5">
-                    <Link to="/login">Login</Link> or{" "}
-                    <Link to="/signup">Sign Up</Link> to continue
-                  </h3>
-                </div>
-              )
-            }
-          />
+          <Route path="/" exact element={<Home />} />
           \
           <Route path="/login" exact element={<Login />} />
           <Route path="/account" exact element={<Account />} />
@@ -185,7 +168,7 @@ function App() {
           <Route path="/mycart" exact element={<MyCart />} />
         </Routes>
         {alert && <Alert />}
-        <Footer/>
+        <Footer />
       </UserContext.Provider>
     </>
   );

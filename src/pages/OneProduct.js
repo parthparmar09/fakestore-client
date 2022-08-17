@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import UserContext from "../UserContext";
 
-import Spinner from "./Spinner";
+import Spinner from "../components/Spinner";
 
 export default function OneProduct() {
   const location = useLocation();
@@ -11,12 +11,7 @@ export default function OneProduct() {
 
   const renderProduct = () => {
     const id = location.pathname.split("/")[2];
-    fetch(`${process.env.REACT_APP_BASE_URL}product/${id}`, {
-      method: "GET",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
+    fetch(`${process.env.REACT_APP_BASE_URL}product/${id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

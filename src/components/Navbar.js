@@ -4,13 +4,14 @@ import UserContext from "../UserContext";
 
 function Navbar() {
   let location = useLocation();
-  const { giveAlert , cartItems } = useContext(UserContext);
+  const { giveAlert , cartItems ,setCartItems } = useContext(UserContext);
 
   let navigate = useNavigate();
 
   const logout = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
+    setCartItems([])
     navigate("/");
     giveAlert("warning", "logged out");
   };
@@ -35,7 +36,7 @@ function Navbar() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-         {localStorage.getItem('token') &&<div className="collapse navbar-collapse text-center" id="navbar">
+         <div className="collapse navbar-collapse text-center" id="navbar">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center">
               <li className="nav-item">
                 <Link
@@ -121,7 +122,7 @@ function Navbar() {
                 Log in
               </Link>
             )}
-          </div> }
+          </div> 
         </div>
       </nav>
     </div>

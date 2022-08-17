@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../UserContext";
-import Album from "./Album";
+import Album from "../components/Album";
 import { useLocation } from "react-router-dom";
 
 export default function Category() {
@@ -28,13 +28,7 @@ export default function Category() {
       setTitle(`Everything in ${category.split("%20").join(" ")}`);
     }
 
-    fetch(url, {
-      method: "GET",
-      headers: {
-        "Access-Control-Allow-Origin": true,
-        authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
+    fetch(url)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

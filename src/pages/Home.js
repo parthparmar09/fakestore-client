@@ -1,7 +1,7 @@
 import React from "react";
 
 
-import Caraousel from "./Caraousel";
+import Caraousel from "../components/Caraousel";
 
 export default function Home() {
 
