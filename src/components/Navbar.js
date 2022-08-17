@@ -11,7 +11,7 @@ function Navbar() {
   const logout = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
-    setCartItems([])
+    setCartItems([  ])
     navigate("/");
     giveAlert("warning", "logged out");
   };

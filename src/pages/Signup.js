@@ -10,7 +10,9 @@ export default function Signup() {
       e.preventDefault()
       const btn = e.target
       btn.classList.add('disabled')
+      btn.innerText = 'wait 60s'
       setTimeout(() => {
+      btn.innerText = 'get OTP'
         btn.classList.remove('disabled')
       },60*1000);
         const email = document.getElementById('inpEmail').value

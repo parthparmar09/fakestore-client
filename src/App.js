@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, useNavigate} from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 import Alert from "./components/Alert";
 import Category from "./pages/Category";
@@ -24,16 +24,21 @@ function App() {
   let navigate = useNavigate();
 
   const signUp = (name, email, password, cpassword, otp) => {
-    let url = "";
+    if (!email || !password || !cpassword || !otp) {
+      return giveAlert("warning", "all fields are required");
+    }
+
     if (password !== cpassword) {
       return giveAlert("warning", "passwords doesn't match");
     }
 
+    let url = "";
     if (name === "") {
       url = `${process.env.REACT_APP_BASE_URL}user/changePass`;
     } else {
       url = `${process.env.REACT_APP_BASE_URL}user/register`;
     }
+
     fetch(url, {
       method: "POST",
       headers: {
