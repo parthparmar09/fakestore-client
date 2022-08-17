@@ -84,6 +84,9 @@ function App() {
   };
 
   const getCart = () => {
+    if(!localStorage.getItem('token')){
+      return null
+    }
     fetch(`${process.env.REACT_APP_BASE_URL}cart/`, {
       method: "GET",
       headers: {
@@ -100,6 +103,9 @@ function App() {
   };
 
   const addToCart = (id, title, image, price, qty = 1) => {
+    if(!localStorage.getItem('token')){
+      return giveAlert('warning' , 'login/signup to add')
+    }
     fetch(`${process.env.REACT_APP_BASE_URL}cart/`, {
       method: "PATCH",
       headers: {
