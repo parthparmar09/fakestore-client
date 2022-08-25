@@ -23,9 +23,6 @@ code {
 
 }
 
-
-
-
 .sign-forms {
   margin-top: 5em;
   width: 50vw;
@@ -52,14 +49,17 @@ code {
   width: 150px;
 }
 
+#carIndicators{
+  height: 70vh;
+  width: 100%;
+  border: 2px solid black;
+}
 
 @media screen and (max-width : 768px) {
   #cart {
     width: 20px;
     display: flex;
   }
-
-
 
   .sign-forms {
     margin-top: 5em;

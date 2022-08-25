@@ -5,7 +5,7 @@ import CheckOut from "../components/CheckOut";
 import { Link } from "react-router-dom";
 
 export default function MyCart() {
-  const { cartItems, getCart } = useContext(UserContext);
+  const { cartItems } = useContext(UserContext);
   const [total, setTotal] = useState(
     Math.floor(
       cartItems
@@ -14,11 +14,6 @@ export default function MyCart() {
     )
   );
 
-  useEffect(() => {
-    getCart();
-
-    // eslint-disable-next-line
-  }, []);
   useEffect(() => {
     setTotal(
       Math.floor(
@@ -33,12 +28,12 @@ export default function MyCart() {
   return (
     <div className="container my-5 py-4">
       <h2 className="ms-3">My cart</h2>
-      {localStorage.getItem('token') ? <div className="container d-flex row" id="mycart">
+      {localStorage.getItem('token') ? <div className="d-flex row" id="mycart">
         {cartItems.length === 0 ? 
           <h6 className="text-muted">Your cart is empty</h6>
          : 
           <>
-            <div className="container col col-8" id="cart-items">
+            <div className=" col col-8" id="cart-items">
               {cartItems.map((item) => {
                 return <CartItem key={item.id} product={item} />;
               })}

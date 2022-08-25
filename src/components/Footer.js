@@ -33,7 +33,7 @@ export default function Footer() {
           </a>
         </li>
       </ul>
-      <p className="text-center text-muted">© 2022 Company, Inc</p>
+      <p className="text-center text-muted">© 2022 FakeStore, Inc</p>
     </footer>
   );
 }

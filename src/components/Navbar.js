@@ -1,25 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext ,useState , useEffect} from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import UserContext from "../UserContext";
 
 function Navbar() {
   let location = useLocation();
   const { giveAlert , cartItems ,setCartItems } = useContext(UserContext);
-
   let navigate = useNavigate();
 
-  const logout = (e) => {
-    e.preventDefault();
+  const logout = () => {
     localStorage.removeItem("token");
     setCartItems([  ])
     navigate("/");
     giveAlert("warning", "logged out");
   };
 
-  
   return (
-    <div className="container">
-      <nav className="navbar navbar-expand-lg bg-dark navbar-dark px-lg-4 fixed-top ">
+      <nav className="navbar navbar-expand-lg bg-dark navbar-dark px-lg-4 fixed-top">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
             <i className="fa-solid fa-store-slash px-2"></i>
@@ -36,7 +32,7 @@ function Navbar() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-         <div className="collapse navbar-collapse text-center" id="navbar">
+         <div className="collapse navbar-collapse text-center" id="navbar" >
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center">
               <li className="nav-item">
                 <Link
@@ -62,18 +58,18 @@ function Navbar() {
             <li><Link className="dropdown-item" to="/category/women's clothing">Women's wear</Link></li>
           </ul></li>
         
-              {/* <li className="nav-item">
+              <li className="nav-item">
                 <Link
                   className={
                     "nav-link " +
-                    (location.pathname === "/profile" ? "active" : "")
+                    (location.pathname === "/orders" ? "active" : "")
                   }
                   aria-current="page"
-                  to="/account"
+                  to="/orders"
                 >
-                  Account
+                  Orders
                 </Link>
-              </li> */}
+              </li>
               <li className="nav-item">
                 <Link
                   className={
@@ -104,7 +100,7 @@ function Navbar() {
             <i className="fa-brands fa-opencart text-light" ></i>
               
               <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success" id="cart-badge">
-                {cartItems?.length}
+                {cartItems.length}
                 <span className="visually-hidden">unread messages</span>
               </span>
             </Link>
@@ -112,7 +108,7 @@ function Navbar() {
             {localStorage.getItem("token") ? (
               <Link
                 className="btn mx-2 my-2 btn-secondary"
-                onClick={(e) => logout(e)}
+                onClick={logout}
                 to="/"
               >
                 Log out
@@ -125,7 +121,6 @@ function Navbar() {
           </div> 
         </div>
       </nav>
-    </div>
   );
 }
 

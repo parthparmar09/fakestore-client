@@ -1,14 +1,14 @@
 import React from "react";
 
 
-import Caraousel from "../components/Caraousel";
+
 
 export default function Home() {
 
 
   return (
-    <div className="my-5 pt-3">
-    <Caraousel/>
+    <div className="container mt-5 pt-5">
+      <h4>This page is under construction</h4>
     </div>
-  );
+  )
 }

@@ -84,8 +84,8 @@ function App() {
   };
 
   const getCart = () => {
-    if(!localStorage.getItem('token')){
-      return null
+    if (!localStorage.getItem("token")) {
+      return null;
     }
     fetch(`${process.env.REACT_APP_BASE_URL}cart/`, {
       method: "GET",
@@ -103,8 +103,9 @@ function App() {
   };
 
   const addToCart = (id, title, image, price, qty = 1) => {
-    if(!localStorage.getItem('token')){
-      return giveAlert('warning' , 'login/signup to add')
+    updateCartItems(id, title, image, price, qty );
+    if (!localStorage.getItem("token")) {
+      return giveAlert("warning", "login/signup to add");
     }
     fetch(`${process.env.REACT_APP_BASE_URL}cart/`, {
       method: "PATCH",
@@ -127,10 +128,24 @@ function App() {
         if (!data.success) {
           return giveAlert("danger", data.msg);
         }
-        giveAlert("success", data.msg);
-        getCart();
       })
       .catch((err) => console.log(err));
+  };
+
+  const updateCartItems = (id, title, image, price, qty ) => {
+    let temp = cartItems;
+    const tempId = temp.findIndex(item => item.id === id );
+    if(tempId === -1){
+      temp.push({id,title,image,price,qty})
+    }else if(tempId >= 0){
+      temp = temp.map(item => {
+        if(item.id === id){
+          return {...item , qty}
+        }
+        return item
+      })
+    }
+    setCartItems(temp)
   };
 
   const giveAlert = (type, msg) => {
