@@ -9,7 +9,7 @@ export default function OneProduct() {
   const [product, setProduct] = useState({});
   const { addToCart, giveAlert } = useContext(UserContext);
 
-  const renderProduct = () => {
+  const getProduct = () => {
     const id = location.pathname.split("/")[2];
     fetch(`${process.env.REACT_APP_BASE_URL}product/${id}`)
       .then((res) => res.json())
@@ -26,19 +26,16 @@ export default function OneProduct() {
     addToCart(product.id, product.title, product.image, product.price, qty);
   };
   useEffect(() => {
-    renderProduct();
+    getProduct();
     // eslint-disable-next-line
   }, []);
 
   return (
-    <>
+    <div className="my-5 pt-5 d-flex w-75 mx-auto" id="single-product">
       {product.title === undefined ? (
         <Spinner />
       ) : (
-        <div
-          className="my-5 pt-5 d-flex w-75 w-sm-100 mx-auto"
-          id="single-product"
-        >
+        <>
           <div className="image-container">
             <img
               src={product.image}
@@ -49,17 +46,21 @@ export default function OneProduct() {
             />
           </div>
 
-          <div className="right d-flex flex-column text-left mt-1 p-3">
-            <h3>{product.title}</h3>
-            <p>{product.description}</p>
-            <h3>&#8377;{product.price}</h3>
-            <h5>
-              Rating : {product.rating.rate}/5 from {product.rating.count}{" "}
-              reviews
-            </h5>
+          <div className="container d-flex flex-column text-left pt-3 m-3">
+            <div>
+              <h3>{product.title}</h3>
+              <p>{product.description}</p>
+              <h3>&#8377;{product.price}</h3>
+              <h5>
+                Rating : {product.rating.rate}/5 from {product.rating.count}{" "}
+                reviews
+              </h5>
+            </div>
 
             <div className=" d-flex justify-content-start align-items-center">
-              <label htmlFor="qty" className="me-1">Quantity :</label>
+              <label htmlFor="qty" className="me-1">
+                Quantity :
+              </label>
               <input
                 type="number"
                 name="qty"
@@ -67,7 +68,7 @@ export default function OneProduct() {
                 min="1"
                 max="5"
                 defaultValue="1"
-                style={{ width: "50px", height: "2rem" , borderRadius : '5px' }}
+                style={{ width: "50px", height: "2rem", borderRadius: "5px" }}
               />
               <button
                 className="btn btn-secondary mx-2"
@@ -78,9 +79,8 @@ export default function OneProduct() {
               </button>
             </div>
           </div>
-          <div className=" p-3"></div>
-        </div>
+        </>
       )}
-    </>
+    </div>
   );
 }

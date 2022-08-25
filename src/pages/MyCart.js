@@ -33,7 +33,7 @@ export default function MyCart() {
           <h6 className="text-muted">Your cart is empty</h6>
          : 
           <>
-            <div className=" col col-8" id="cart-items">
+            <div className="col col-8" id="cart-items">
               {cartItems.map((item) => {
                 return <CartItem key={item.id} product={item} />;
               })}

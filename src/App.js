@@ -4,15 +4,16 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Alert from "./components/Alert";
 import Category from "./pages/Category";
 import Contact from "./pages/Contact";
+import Orders from "./pages/Orders";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import MyCart from "./pages/MyCart";
 import Navbar from "./components/Navbar";
 import OneProduct from "./pages/OneProduct";
-import Account from "./pages/Account";
 import Signup from "./pages/Signup";
 import UserContext from "./UserContext";
+import OneOrder from "./pages/OneOrder";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -99,14 +100,13 @@ function App() {
           setCartItems(data.cart.items);
         }
       })
-      .catch((err) => console.log(err));
   };
 
   const addToCart = (id, title, image, price, qty = 1) => {
-    updateCartItems(id, title, image, price, qty );
     if (!localStorage.getItem("token")) {
       return giveAlert("warning", "login/signup to add");
     }
+    updateCartItems(id, title, image, price, qty );
     fetch(`${process.env.REACT_APP_BASE_URL}cart/`, {
       method: "PATCH",
       headers: {
@@ -127,6 +127,7 @@ function App() {
       .then((data) => {
         if (!data.success) {
           return giveAlert("danger", data.msg);
+
         }
       })
       .catch((err) => console.log(err));
@@ -186,9 +187,10 @@ function App() {
           <Route path="/" exact element={<Home />} />
           \
           <Route path="/login" exact element={<Login />} />
-          <Route path="/account" exact element={<Account />} />
+          <Route path="/orders" exact element={<Orders/>} />
           <Route path="/category/:cagerory" exact element={<Category />} />
           <Route path="/product/:id" exact element={<OneProduct />} />
+          <Route path="/order/:id" exact element={<OneOrder />} />
           <Route path="/contact" exact element={<Contact />} />
           <Route path="/signup" exact element={<Signup />} />
           <Route path="/mycart" exact element={<MyCart />} />

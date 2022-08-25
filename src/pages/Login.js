@@ -1,19 +1,19 @@
 import React, { useContext } from "react";
-import { Link , useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../UserContext";
 
 export default function Login() {
-  const { getOtp , signUp , giveAlert} = useContext(UserContext);
-  const navigate = useNavigate()
+  const { getOtp, signUp, giveAlert } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const otpHandle = (e) => {
     e.preventDefault();
     const btn = e.target;
     btn.classList.add("disabled");
-    btn.innerText = 'wait 60s'
+    btn.innerText = "wait 60s";
 
     setTimeout(() => {
-      btn.innerText = 'get OTP'
+      btn.innerText = "get OTP";
 
       btn.classList.remove("disabled");
     }, 60 * 1000);
@@ -52,7 +52,7 @@ export default function Login() {
     const cpassword = document.getElementById("inpPassword1").value;
     const otp = document.getElementById("inpOtp").value;
 
-    signUp('',email, password, cpassword, otp);
+    signUp("", email, password, cpassword, otp);
   };
 
   return (
@@ -127,12 +127,7 @@ export default function Login() {
               ></button>
             </div>
             <div className="modal-body">
-              <form
-                action=""
-                onSubmit={(e) => {
-                  passChangeHandle(e);
-                }}
-              >
+              <form action="" onSubmit={passChangeHandle}>
                 <label htmlFor="inpEmail" className="form-label">
                   Email
                 </label>
@@ -176,7 +171,7 @@ export default function Login() {
 
                   <button
                     className="mx-2 btn btn-outline-success"
-                    onClick={(e) => otpHandle(e)}
+                    onClick={otpHandle}
                   >
                     get OTP
                   </button>
@@ -189,7 +184,7 @@ export default function Login() {
                   >
                     Cancel
                   </button>
-                  <button type="submit" className="btn btn-success">
+                  <button type="submit" className="btn btn-success" data-bs-dismiss="modal" >
                     Change
                   </button>
                 </div>
