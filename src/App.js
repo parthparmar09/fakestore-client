@@ -147,6 +147,7 @@ function App() {
       })
     }
     setCartItems(temp)
+    giveAlert('success' , 'cart updated')
   };
 
   const giveAlert = (type, msg) => {

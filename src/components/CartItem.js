@@ -13,6 +13,8 @@ export default function CartItem(props) {
   const handleRemove = () => {
     let temp = cartItems.filter((item) => item.id !== id);
     setCartItems(temp);
+    giveAlert('success' , 'item removed')
+
     fetch(`${process.env.REACT_APP_BASE_URL}cart/${id}`, {
       method: "DELETE",
       headers: {

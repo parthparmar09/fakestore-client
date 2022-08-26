@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import Spinner from "../components/Spinner";
 import UserContext from "../UserContext";
 
 export default function Orders() {
@@ -18,6 +19,7 @@ export default function Orders() {
         if (data.success) {
           let items = data.orders.reverse();
           setOrders(items);
+          
         } else {
           console.log(data.msg);
         }
@@ -25,6 +27,10 @@ export default function Orders() {
   };
 
   const cancelHandle = (id) => {
+
+    if(!window.confirm("Are you sure want to cancel this order ?")){
+      return null
+    }
     fetch(`${process.env.REACT_APP_BASE_URL}order/${id}`, {
       method: "DELETE",
       headers: {
@@ -50,7 +56,8 @@ export default function Orders() {
     <>
       <div className="container my-5 py-4 ">
         <h3 className="ms-3">My Orders</h3>
-        <div className="container">
+        {orders.length > 0 ? <div className="container">
+          <div className="table-responsive">
           <table className="table">
             <thead>
               <tr>
@@ -106,9 +113,11 @@ export default function Orders() {
                   </tr>
                 );
               })}
+             
             </tbody>
           </table>
-        </div>
+          </div>
+        </div> : <Spinner/>}
       </div>
     </>
   );

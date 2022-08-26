@@ -4,12 +4,12 @@ import UserContext from "../UserContext";
 
 function Navbar() {
   let location = useLocation();
-  const { giveAlert , cartItems ,setCartItems } = useContext(UserContext);
   let navigate = useNavigate();
+  const { giveAlert , cartItems ,setCartItems } = useContext(UserContext);
 
   const logout = () => {
     localStorage.removeItem("token");
-    setCartItems([  ])
+    setCartItems([])
     navigate("/");
     giveAlert("warning", "logged out");
   };
