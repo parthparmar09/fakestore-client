@@ -41,7 +41,7 @@ export default function CheckOut(props) {
 
   const displayPayment = (o_id) => {
     var options = {
-      key: "rzp_test_0sodoJkEKmj7Ib",
+      key: process.env.REACT_APP_PAY_KEY,
       currency: "INR",
       name: "FakeStore",
       description: `#${o_id}`,
