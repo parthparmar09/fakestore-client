@@ -9,9 +9,6 @@ export default function OneOrder() {
   const [order, setOrder] = useState(null);
   const [user, setUser] = useState(null);
   const getOrder = () => {
-    if (!localStorage.getItem("token")) {
-      return giveAlert("danger", "login/signup first");
-    }
     const id = location.pathname.split("/")[2];
     fetch(`${process.env.REACT_APP_BASE_URL}order/${id}`, {
       method: "GET",

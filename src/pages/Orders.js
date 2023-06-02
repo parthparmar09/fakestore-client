@@ -8,6 +8,7 @@ export default function Orders() {
   const { giveAlert } = useContext(UserContext);
 
   const getOrders = () => {
+   
     fetch(`${process.env.REACT_APP_BASE_URL}order/`, {
       method: "GET",
       headers: {
@@ -50,7 +51,12 @@ export default function Orders() {
   };
 
   useEffect(() => {
-    getOrders();
+    if (!localStorage.getItem("token")) {
+      giveAlert("danger", "login/signup first");
+    }else{
+      getOrders();
+
+    }
   }, []);
   return (
     <>
